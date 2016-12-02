@@ -1,4 +1,4 @@
-package project_v1;
+package project_v3;
 
 /**
  * This class is used to represent a customer shopping in a Shopping Center
@@ -6,7 +6,7 @@ package project_v1;
  * @author Jon Spratt, Meriel Stein
  * @version v1_11.20.2016
  */
-public class Customer {
+public class Customer extends KeyedItem<String>{
 	/**
 	 * The name of this customer
 	 */
@@ -28,6 +28,7 @@ public class Customer {
 	 * Default constructor for an anonymous customer
 	 */
 	public Customer() {
+		super("N/A");
 		name = "N/A";
 		cart = 0;
 		shoppingTime = 0;
@@ -36,11 +37,10 @@ public class Customer {
 
 	/**
 	 * Constructor for a named customer
-	 * 
-	 * @param name
-	 *            customer's name
+	 * @param name customer's name
 	 */
 	public Customer(String name) {
+		super(name);
 		this.name = name;
 		cart = 0;
 		shoppingTime = 0;
@@ -97,6 +97,32 @@ public class Customer {
 	}
 
 	/**
+	 * Add an item to the customer's cart
+	 */
+	protected void addItemToCart() {
+		cart++;
+	}
+	
+	/**
+	 * Remove an item from the customer's cart
+	 */
+	protected void removeItemFromCart() {
+		if (cart == 0) {
+			throw new CartException("The cart is empty.");
+		}
+		else {
+			cart--;
+		}
+	}
+	
+	/**
+	 * Increase the amount of time the customer has been shopping by one.
+	 */
+	protected void incrementShoppingTime() {
+		shoppingTime++;
+	}
+	
+	/**
 	 * format when inCheckout: Customer Eevee has 7 items in the shopping basket.
 	 * format when !inCheckout: Customer Pansage with 2 items present for 27 minutes.
 	 * may be able to resolve this difference with functional programming so we
@@ -104,10 +130,10 @@ public class Customer {
 	 */
 	public String toString() {
 		if (inCheckout) {
-			return "Customer " + name + " has " + cart
+			return "\tCustomer " + name + " has " + cart
 					+ " items in the shopping basket.\n";
 		} else {
-			return "Customer " + name + " with " + cart + " items present for "
+			return "\tCustomer " + name + " with " + cart + " items present for "
 					+ shoppingTime + " minutes.\n";
 		}
 	}

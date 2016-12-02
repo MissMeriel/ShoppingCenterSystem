@@ -1,11 +1,11 @@
-package project_v1;
+package project_v3;
 
 /**
  * This class is used to represent an item in a shopping center
  * @author Jon Spratt
  * @version v1_11.20.2016
  */
-public class Item {
+public class Item extends KeyedItem<String>{
 	/**
 	 * The name of this item
 	 */
@@ -26,6 +26,7 @@ public class Item {
 	 * @param currentStock the current stock to set for this item
 	 */
 	public Item(String name, int restockThreshold, int currentStock) {
+		super(name);
 		this.name = name;
 		this.restockThreshold = restockThreshold;
 		this.currentStock = currentStock;
@@ -38,6 +39,7 @@ public class Item {
 	 * @param restockThreshold
 	 */
 	public Item(String name, int restockThreshold) {
+		super(name);
 		this.name = name;
 		this.restockThreshold = restockThreshold;
 		currentStock = 0;
@@ -86,5 +88,14 @@ public class Item {
 		if (currentStock < 0) {
 			currentStock = 0;
 		}
+	}
+	
+	/**
+	 * Standard toString method for the items in the collection
+	 */
+	public String toString() {
+		return "Item name: " + name + 
+				"\n\tRestocking threshold: " + restockThreshold +
+				"\n\tCurrent stock: " + currentStock + "\n";
 	}
 }
