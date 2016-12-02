@@ -72,22 +72,18 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	}
 
 	/**
-	 * Search for an item by key using the Binary Search I algorithm
+	 * Search for an item by key using the Binary Search II algorithm
 	 * @param searchKey the key to search for
 	 */
 	public int search(KT searchKey) {
-		int index = 1;
+		int index = 0;
 		int low = 0;
 		int high = numItems;
 		int mid = 0;
-		boolean found = false;
-		while (!found && low != high) {
+		
+		while (low != high) {
 			mid = (low + high) / 2;
-			if (searchKey.compareTo(items[mid].getKey()) == 0) {
-				index = mid;
-				found = true;
-			}
-			else if (searchKey.compareTo(items[mid].getKey()) < 0) {
+			if (searchKey.compareTo(items[mid].getKey()) <= 0){
 				high = mid;
 			}
 			else {
@@ -95,14 +91,14 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 			}
 		}
 		
-		if (items[mid] == null || searchKey.equals(items[mid].getKey())) {
-			mid = (low + high) / 2;
+		mid = (low + high) / 2;
+		
+		if (items[mid]== null || searchKey.equals(items[mid].getKey())) {
 			index = mid + 1;
 		}
-		else { 
-			mid = (low + high) / 2;
+		else {
 			index = (mid + 1) * -1;
-		}		
+		}
 		return index;
 	}
 
@@ -174,3 +170,34 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 		return myString;
 	}
 }
+
+
+
+
+//SPARE PARTS - REMOVE LATER
+/* BINARY SEARCH I on KeyedItem key comparison
+boolean found = false;
+while (!found && low != high) {
+	mid = (low + high) / 2;
+	if (searchKey.compareTo(items[mid].getKey()) == 0) {
+		index = mid;
+		found = true;
+	}
+	else if (searchKey.compareTo(items[mid].getKey()) < 0) {
+		high = mid;
+	}
+	else {
+		low = mid + 1;
+	}
+}
+
+if (items[mid] == null || searchKey.equals(items[mid].getKey())) {
+	mid = (low + high) / 2;
+	index = mid + 1;
+}
+else { 
+	mid = (low + high) / 2;
+	index = (mid + 1) * -1;
+}		
+return index;
+*/
