@@ -79,10 +79,9 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 		int index = 0;
 		int low = 0;
 		int high = numItems;
-		int mid = 0;
+		int mid = (low + high) / 2;
 		
-		while (low != high) {
-			
+		while (low != high) {		
 			if (searchKey.compareTo(items[mid].getKey()) <= 0){
 				high = mid;
 			}
