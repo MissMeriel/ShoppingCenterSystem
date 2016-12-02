@@ -91,9 +91,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 			}
 			mid = (low + high) / 2;
 		}
-		
-		//mid = (low + high) / 2;
-		
+				
 		if (items[mid]== null || searchKey.equals(items[mid].getKey())) {
 			index = mid + 1;
 		}
