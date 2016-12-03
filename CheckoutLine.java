@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 /**
  * DSA Project Normal checkout line
@@ -24,7 +24,7 @@ public class CheckoutLine {
 		line = new Queue<Customer>();
 		this.name = name;
 	}
-	
+
 	/**
 	 * Adds customer to the end of the checkout queue.
 	 * 
@@ -49,11 +49,16 @@ public class CheckoutLine {
 		return line.getLength();
 	}
 
-	//toString() needs to follow format:
-	//	Customer Eevee has 7 items in the shopping basket.
-	//	Customer Woobat has 6 items in the shopping basket.
+	// toString() needs to follow format:
+	// Customer Eevee has 7 items in the shopping basket.
+	// Customer Woobat has 6 items in the shopping basket.
 	public String toString() {
-		return line.toString();
+		if (line.isEmpty()) {
+			return "There are no customers in " + name + "!";
+		} else {
+			return "The following " + line.getLength() + " customers are in "
+					+ name + ":\n" + line.toString();
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 /**
  * This class represents the AscendingOrderList ADT 
@@ -20,6 +20,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	/**
 	 * Constructor for AscendingOrderList
 	 */
+	@SuppressWarnings("unchecked")
 	public AscendingOrderList() {
 		items = (T[]) new KeyedItem[3];
 		numItems = 0;
@@ -62,12 +63,12 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	public T get(int index) throws ListIndexOutOfBoundsException {
 		if (index >= 0 && index <= numItems)
         {
-			index -= 1;
+			//index -= 1;
             return items[index];
         }
         else
         {
-        	throw new ListIndexOutOfBoundsException("The selection is not in the shopping center.");
+        	throw new ListIndexOutOfBoundsException("Index "+index+" is out of range.");
         }  // end if
 	}
 
@@ -90,7 +91,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 			}
 			mid = (low + high) / 2;
 		}
-				
+		// why if items[mid]== null
 		if (items[mid]== null || searchKey.equals(items[mid].getKey())) {
 			index = mid + 1;
 		}

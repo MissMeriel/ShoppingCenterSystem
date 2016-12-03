@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 /**
  * This class is used to represent an item in a shopping center
@@ -84,9 +84,10 @@ public class Item extends KeyedItem<String>{
 	 * @param amount the amount to adjust the current stock by
 	 */
 	public void adjustCurrentStock(int amount) {
-		currentStock += amount;
-		if (currentStock < 0) {
-			currentStock = 0;
+		if (currentStock + amount < 0) {
+			throw new ItemException();
+		} else {
+			currentStock += amount;	
 		}
 	}
 	

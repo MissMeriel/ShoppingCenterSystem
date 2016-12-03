@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 public abstract class KeyedItem<KT extends Comparable<? super KT>> {
 	private KT searchKey;

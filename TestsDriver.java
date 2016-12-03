@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,10 +19,12 @@ public class TestsDriver {
 		//AscendingOrderList<Customer, String> customers = new AscendingOrderList<Customer, String>();
 		//AscendingOrderList<Item, String> inventory = new AscendingOrderList<Item, String>();
 		
-		inventory = generateRandomInventory(5);
-		customers = generateTestCustomers(customers);
-		System.out.println(customers.toString());
-		System.out.println(inventory.toString());	
+//		inventory = generateRandomInventory(5);
+//		customers = generateTestCustomers(customers);
+//		System.out.println(customers.toString());
+//		System.out.println(inventory.toString());	
+		System.out.println("customers.get(-1);");
+		customers.get(-1);
 		
 		
 		//String item_name = br.readLine().trim();
