@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 /**
  * This class is used to represent a customer shopping in a Shopping Center

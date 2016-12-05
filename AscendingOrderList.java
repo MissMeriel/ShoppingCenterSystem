@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 /**
  * This class represents the AscendingOrderList ADT 
@@ -20,6 +20,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	/**
 	 * Constructor for AscendingOrderList
 	 */
+	@SuppressWarnings("unchecked")
 	public AscendingOrderList() {
 		items = (T[]) new KeyedItem[3];
 		numItems = 0;
@@ -35,10 +36,11 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
         	resize();
         }  // end if
 		
-		int index = Math.abs(search(item.getKey())) - 1;
+		int index = /*Math.abs(*/search(item.getKey())/*) - 1*/;
 		
-        if (index >= 0 && index <= numItems)
+        if (index < 0 && index <= numItems)
         {
+        	index = (index*-1)-1;
             // make room for new element by shifting all items at
             // positions >= index toward the end of the
             // list (no shift if index == numItems+1)
@@ -51,28 +53,33 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
             numItems++;
         } // end if
         else {
-        	throw new ListIndexOutOfBoundsException("Index of out bounds");
+        	String s = "Index of out bounds";
+        	if(index >= 0){
+        		s+= "; item already exists in list.";
+        	}
+        	throw new ListIndexOutOfBoundsException(s);
         }
 	}
 
 	/**
-	 * Retrieve an item from the collection by index
+	 * Retrieve an item from the collection by index from 0 to size()-1.
 	 * @param index the index to retrieve an item from
 	 */
 	public T get(int index) throws ListIndexOutOfBoundsException {
 		if (index >= 0 && index <= numItems)
         {
-			index -= 1;
+			//index -= 1;
             return items[index];
         }
         else
         {
-        	throw new ListIndexOutOfBoundsException("The selection is not in the shopping center.");
+        	throw new ListIndexOutOfBoundsException("Index "+index+" is out of range.");
         }  // end if
 	}
 
 	/**
 	 * Search for an item by key using the Binary Search II algorithm
+	 * @return index from 0 to size()-1 if item is found; (index+1)*-1 of where the item would go if item is not found
 	 * @param searchKey the key to search for
 	 */
 	public int search(KT searchKey) {
@@ -90,9 +97,9 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 			}
 			mid = (low + high) / 2;
 		}
-				
-		if (items[mid]== null || searchKey.equals(items[mid].getKey())) {
-			index = mid + 1;
+		// why if items[mid]== null?
+		if (items[mid] != null && searchKey.equals(items[mid].getKey())) {
+			index = mid /*+1*/;
 		}
 		else {
 			index = (mid + 1) * -1;
