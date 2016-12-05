@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 public class Queue<T> implements QueueInterface <T> {
 

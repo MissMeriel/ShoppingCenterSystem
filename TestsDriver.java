@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,32 +19,41 @@ public class TestsDriver {
 		//AscendingOrderList<Customer, String> customers = new AscendingOrderList<Customer, String>();
 		//AscendingOrderList<Item, String> inventory = new AscendingOrderList<Item, String>();
 		
-		inventory = generateRandomInventory(5);
+//		inventory = generateRandomInventory(5);
 		customers = generateTestCustomers(customers);
-		System.out.println(customers.toString());
-		System.out.println(inventory.toString());	
+//		System.out.println(customers.toString());
+//		System.out.println(inventory.toString());	
+//		System.out.println("customers.get(-1);");
+//		customers.get(-1);
 		
 		
 		//String item_name = br.readLine().trim();
 		
 		try {
 			Customer cust;
-			System.out.println(cust = customers.get(customers.search("Alpha")));
-			Item item = inventory.get(inventory.search("Banana"));
+			System.out.print("customers.search(Alpha): ");
+			int alphaIndex = (customers.search("Alpha"));
+			System.out.println(alphaIndex);
+			System.out.print("customers.get(alphaIndex): ");
+			System.out.println(cust = customers.get(alphaIndex));
+			int bananaIndex = inventory.search("Banana");
+			System.out.println("inventory.search(Banana): "+bananaIndex);
+			Item item = inventory.get(bananaIndex);
+			System.out.println("banana: "+item.toString());
 			item.adjustCurrentStock(-1);
 			System.out.println(inventory.toString());
 		}
 		catch (ListIndexOutOfBoundsException e) {
 			System.out.println(e.getMessage());
 		}
-	}
+	} //end main
 	
 	public static AscendingOrderList<Customer, String> generateTestCustomers(AscendingOrderList<Customer, String> customers) {
 		customers.add(new Customer("Alpha"));
-		customers.add(new Customer("Zulu"));
-		customers.add(new Customer("Sierra"));
 		customers.add(new Customer("Lima"));
 		customers.add(new Customer("Romeo"));
+		customers.add(new Customer("Sierra"));
+		customers.add(new Customer("Zulu"));
 		return customers;
 	}
 	

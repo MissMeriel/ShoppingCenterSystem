@@ -1,4 +1,4 @@
-package project_v3;
+package master;
 @SuppressWarnings("serial")
 public class QueueException extends RuntimeException {
 
