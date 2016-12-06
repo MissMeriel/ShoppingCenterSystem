@@ -55,7 +55,7 @@ public class Item extends KeyedItem<String>{
 	
 	/**
 	 * Standard Accessor - for the re-stocking threshold of this item
-	 * @return
+	 * @return returns the re-stocking threshold amount for an item
 	 */
 	public int getRestockThreshold() {
 		return restockThreshold;
@@ -63,7 +63,7 @@ public class Item extends KeyedItem<String>{
 	
 	/**
 	 * Standard Mutator - for the re-stocking threshold of this item
-	 * @param restockThreshold
+	 * @param restockThreshold the re-stocking threshold to set for an item
 	 */
 	public void setRestockThreshold(int restockThreshold) {
 		this.restockThreshold = restockThreshold;

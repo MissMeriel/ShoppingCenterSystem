@@ -1,8 +1,8 @@
 package master;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 
 /**
  * DSA Project Driver
@@ -13,13 +13,15 @@ import java.io.InputStreamReader;
 
 public class Driver {
 
+	/**
+	 * Buffered reader for user input
+	 */
 	private static BufferedReader br = new BufferedReader(
-			new InputStreamReader(System.in));
-
+				new InputStreamReader(System.in));
+	
 	public static void main(String[] args) {
-
+		
 		// Instance variables to be used during application runtime
-		// CHANGED SCOPE OF lines, inventory -- OTHERWISE CLOGGING EXE STACK
 		ShoppingCenter center = new ShoppingCenter();
 
 		Customer cust = new Customer();
@@ -64,8 +66,6 @@ public class Driver {
 			lines.add(0, new CheckoutLine("checkout line #1"));
 			lines.add(1, new CheckoutLine("checkout line #2"));
 			lines.add(2, new ExpressLine("express checkout line"));
-			// HANDLE WHO CHECKS OUT FIRST DIFFERENTLY? INSTEAD OF REORDERING?
-			// DR H MAINTAINS ABOVE ORDER.
 			System.out
 					.print("Please select the checkout line that should check out customers first (regular1/regular2/express): ");
 			input = br.readLine().trim();
@@ -90,8 +90,6 @@ public class Driver {
 
 					switch (menuSelection) {
 					case 1: // Customer enters Shopping Center.
-						// MUST TRY FOR A NAME THAT ISN'T ALREADY IN SHOPPING
-						// CENTER UNTIL THEY GET ONE
 						boolean successful = false;
 						while (!successful) {
 							System.out.print("Enter customer name: ");
@@ -110,7 +108,6 @@ public class Driver {
 						break;
 					case 2: // Customer picks an item and places it the shopping
 							// cart.
-						// HANDLE ITEMS THAT DON'T EXIST
 						if (center.getCustomers().isEmpty()) {
 							System.out
 									.println("No one is in the Shopping Center!");
@@ -162,9 +159,8 @@ public class Driver {
 									successful = true;
 								} catch (CartException e) { // Cart is already empty
 									System.out.println(e.getMessage());
-								} catch (ListIndexOutOfBoundsException e) { // Customer
-																			// not
-																			// found
+								} catch (ListIndexOutOfBoundsException e) { 
+									//Customer not found
 									System.out.println(e.getMessage());
 								}
 							}
@@ -193,7 +189,7 @@ public class Driver {
 						center.removeCustomer(high_time_cust);
 						// If the customer who has been in the Shopping Center
 						// the longest has no items in the cart, then s/he can
-						// either leave or return to shopping without standing
+						// either leave or return to shopping center without standing
 						// in line to check out. If the customer returns to
 						// shopping, the customer's shopping time is reset.
 						if (high_time_cust.getCart() == 0) {
@@ -239,9 +235,6 @@ public class Driver {
 						// it is to check out a customer, then the next checkout
 						// line that has customers in line will check out the
 						// first customer in line.
-						// NEEDS TO HANDLE CASE WHEN SOME BUT NOT ALL CHECKOUT
-						// LINES ARE
-						// EMPTY
 						if (center.linesEmpty()) {
 							System.out.println("No customers in any line.");
 							break;
@@ -258,6 +251,7 @@ public class Driver {
 											+ customer.getName()
 											+ " check out or keep on shopping? Checkout?(Y/N): ");
 							input = br.readLine().trim().toLowerCase();
+							System.out.println(input);
 							if (input.startsWith("y")) {
 								System.out
 										.println("Customer "
@@ -285,8 +279,6 @@ public class Driver {
 						break;
 					case 8: // Print info about items at or below re-stocking
 							// level.
-						// HANDLE CASE WHEN NO ITEMS ARE AT RESTOCKING LEVEL?
-						// NOTHING HELPFUL IN SAMPLE OUTPUT
 						center.printRestockableItems();
 						break;
 

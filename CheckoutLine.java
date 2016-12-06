@@ -9,7 +9,13 @@ package master;
 
 public class CheckoutLine {
 
+	/**
+	 * The collection of customers in a checkout line
+	 */
 	protected Queue<Customer> line;
+	/**
+	 * The name of a checkout line
+	 */
 	protected String name;
 
 	/**
@@ -20,6 +26,10 @@ public class CheckoutLine {
 		name = "N/A (regular)";
 	}
 
+	/**
+	 * Construct a checkout line with a given name
+	 * @param name the name to construct a checkout line with
+	 */
 	public CheckoutLine(String name) {
 		line = new Queue<Customer>();
 		this.name = name;
@@ -45,18 +55,35 @@ public class CheckoutLine {
 		return line.dequeue();
 	}
 
+	/**
+	 * Standard Accessor - for the length of a checkout line
+	 * @return returns the length of a checkout line
+	 */
 	public int getLength() {
 		return line.getLength();
 	}
 
+	/**
+	 * Standard Accessor - for the name of a checkout line
+	 * @return returns the name of a checkout line
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Standard Mutator - for the name of a checkout line
+	 * @param name the name to set for a checkout line
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Determine whether or not a checkout line has a specific customer in it
+	 * @param customer the customer to check for 
+	 * @return returns true if the customer was found in the checkout line, false otherwise
+	 */
 	public boolean contains(Customer customer){
 		return line.contains(customer);
 	}
@@ -76,5 +103,4 @@ public class CheckoutLine {
 					+ name + ":\n" + line.toString();
 		}
 	}
-
 }

@@ -108,7 +108,7 @@ public class ShoppingCenter {
 	/**
 	 * Adds customer to the end of the AOSL of customers shopping
 	 * @throw ListIndexOutOfBoundsException if customer is already in the Shopping Center
-	 * @param customer
+	 * @param customer the customer to add to the shopping center
 	 */
 	public void addCustomer(Customer customer) {
 		if(linesContain(customer)){
@@ -122,14 +122,6 @@ public class ShoppingCenter {
 		} else {
 			customers.add(customer);
 		}
-		
-//		if (customers.isEmpty() || customers.search(customer.getName()) < 0 && !linesContain(customer)) {
-//			customers.add(customer);
-//		} else {
-//			throw new ListIndexOutOfBoundsException("Customer "
-//					+ customer.getName()
-//					+ " is already in the Shopping Center!");
-//		}
 	}
 
 	public Customer getCustomer(String cust_name) {
@@ -156,7 +148,7 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * 
+	 * Accessor for an item in the inventory specified by index
 	 * @param i
 	 *            index of inventory item
 	 * @return Item at index i
@@ -166,9 +158,8 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * Throws ListIndexOutOfBoundsException if item is not present in Shopping
-	 * Center inventory.
-	 * 
+	 * Accessor for an item in the inventory specified by name
+	 * @throws ListIndexOutOfBoundsException if item is not present in Shopping Center inventory. 
 	 * @return item if extant in inventory
 	 */
 	public Item getInventoryItem(String item) {
@@ -181,7 +172,7 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * 
+	 * Standard Accessor - for the size of the inventory
 	 * @return number of unique items in inventory
 	 */
 	public int getInventorySize() {
@@ -189,7 +180,10 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * 
+	 * Determine whether or not the Shopping Center's checkout lines have 
+	 * a specific customer in waiting in them
+	 * @param customer the customer to check the checkout lines for
+	 * @return returns true if the customer was found in a checkout line, false otherwise
 	 */
 	public boolean linesContain(Customer customer){
 		for (int i = 0; i< lines.size(); i++){
@@ -222,6 +216,9 @@ public class ShoppingCenter {
 		}
 	}
 
+	/**
+	 * Print items at or below re-stocking threshold
+	 */
 	public void printRestockableItems(){
 		System.out.println("Items at restocking level:");
 		for (int i = 0; i < inventory.size(); i++) {
@@ -245,6 +242,10 @@ public class ShoppingCenter {
 		}
 	}
 	
+	/**
+	 * Determine whether or not the checkout lines are empty
+	 * @return returns true is all of the checkout lines are empty, false otherwise
+	 */
 	public boolean linesEmpty(){
 		for (int i = 0; i< lines.size(); i++){
 			if(lines.get(i).getLength() > 0){
@@ -261,7 +262,8 @@ public class ShoppingCenter {
 	 * express line is twice as long as a regular line a customer with <=4 items
 	 * will choose the shortest regular line for checkout instead.
 	 * 
-	 * @param customer
+	 * @param customer the customer to checkout
+	 * @return returns an updated checkout line after the customer has been served
 	 */
 	public CheckoutLine checkoutCustomer(Customer customer) {
 		CheckoutLine lowLine = new CheckoutLine();
@@ -287,5 +289,4 @@ public class ShoppingCenter {
 			return lowLine;
 		}
 	}
-
 }

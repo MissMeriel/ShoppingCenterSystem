@@ -31,40 +31,25 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 
 	/**
 	 * Add an item to the collection by key in ascending order
-	 * 
-	 * @param item
-	 *            the item to add to the collection
+	 * @param item the item to add to the collection
+	 * @throws ListIndexOutOfBoundsException
 	 */
 	public void add(T item) throws ListIndexOutOfBoundsException {
-//		System.out.println("in AOSL add");
-//		System.out.println("\tnumItems:" + numItems);
-//		System.out.println("\titems length:" + items.length);
 		if (numItems == items.length) {
 			resize();
 		} // end if
 
 		int index = search(item.getKey());
 
-//		System.out.println("\tindex:" + index);
-//		System.out.println();
 		if (index < 0 && index <= numItems) {
 			index = (index * -1) - 1;
 			// make room for new element by shifting all items at
 			// positions >= index toward the end of the
 			// list (no shift if index == numItems+1)
 			for (int pos = numItems - 1; pos >= index; pos--) {
-//				System.out.println("\titems[" + (pos + 1) + "] = "
-//						+ items[pos + 1] + "assigned " + "items[" + pos
-//						+ "] = " + items[pos]);
 				items[pos + 1] = items[pos];
-//				for (T t : items) {
-//					if (t != null) {
-//						System.out.print(t.toString() + " ");
-//					}
-//				}
-//				System.out.println();
 			} // end for
-				// insert new item
+			// insert new item
 			items[index] = item;
 			numItems++;
 		} // end if
@@ -79,9 +64,8 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 
 	/**
 	 * Retrieve an item from the collection by index from 0 to size()-1.
-	 * 
-	 * @param index
-	 *            the index to retrieve an item from
+	 * @param index the index to retrieve an item from
+	 * @throws ListIndexOutOfBoundsException
 	 */
 	public T get(int index) throws ListIndexOutOfBoundsException {
 		if (index >= 0 && index <= numItems) {
@@ -107,9 +91,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 		int high = numItems;
 		int mid = (low + high) / 2;
 
-		System.out.println();
 		while (low != high) {
-			//System.out.println("mid="+mid+"; items[mid]:"+items[mid]);
 			if (searchKey.compareTo(items[mid].getKey()) <= 0) {
 				high = mid;
 			} else {
@@ -117,12 +99,9 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 			}
 			mid = (low + high) / 2;
 		}
-		// why if items[mid]== null?
-//		System.out.println("numItems:"+numItems);
-//		System.out.print("mid="+mid+"; ");
-		//System.out.println("items[mid]:"+items[mid]);
+
 		if (mid < numItems && items[mid] != null && searchKey.equals(items[mid].getKey())) {
-			index = mid /* +1 */;
+			index = mid;
 		} else {
 			index = (mid + 1) * -1;
 		}
@@ -145,23 +124,19 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 
 	/**
 	 * Remove an item from the collection by index
+	 * @param index the index in which to remove an item from
+	 * @throws ListIndexOutOfBoundsException
 	 */
 	public void remove(int index) throws ListIndexOutOfBoundsException {
 		if (index >= 0 && index < numItems) {
-			//index -= 1;
 			// delete item by shifting all items at
 			// positions > index toward the beginning of the list
 			// (no shift if index == size)
-			for (int pos = index + 1; pos < numItems; pos++) // textbook code
-																// modified to
-																// eliminate
-																// logic error
-																// causing
-																// ArrayIndexOutOfBoundsException
+			for (int pos = index + 1; pos < numItems; pos++) 
 			{
 				items[pos - 1] = items[pos];
 			} // end for
-			items[--numItems] = null; // fixes memory leak
+			items[--numItems] = null; 
 		} else {
 			throw new ListIndexOutOfBoundsException("Customer not found");
 		} // end if
@@ -170,6 +145,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	/**
 	 * Clear the collection
 	 */
+	@SuppressWarnings("unchecked")
 	public void clear() {
 		items = (T[]) new KeyedItem[3];
 		numItems = 0;
@@ -181,10 +157,6 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	private void resize() {
 		@SuppressWarnings("unchecked")
 		T[] temp = (T[]) new KeyedItem[(int) (items.length * 3 / 2)];
-//		System.out.println("in AOSL resize");
-//		System.out.println("\ttemp length:" + temp.length);
-//		System.out.println("\titems length:" + items.length);
-
 		for (int i = 0; i < items.length; i++) {
 			temp[i] = items[i];
 		}

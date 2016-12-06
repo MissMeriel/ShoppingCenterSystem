@@ -1,8 +1,11 @@
 package master;
 
-	// ********************************************************
-	// Array-based implementation of the ADT list.
-	// *********************************************************
+/**
+ * Array-based implementation of the ADT list.
+ * @author Jon Spratt
+ *
+ * @param <T> the type of item stored in this ADT
+ */
 	public class ListRAB<T> implements ListInterface<T>
 	{
 		/**
@@ -17,7 +20,8 @@ package master;
 	    /**
 	     * Constructor for Resizable Array Based List ADT (ListRAB)
 	     */
-	    public ListRAB()
+	    @SuppressWarnings("unchecked")
+		public ListRAB()
 	    {
 	        items = (T[]) new Object[3];
 	        numItems = 0;
@@ -44,7 +48,8 @@ package master;
 	    /**
 	     * Remove all items from the collection
 	     */
-	    public void removeAll()
+	    @SuppressWarnings("unchecked")
+		public void removeAll()
 	    {
 	        // Creates a new array; marks old array for
 	        // garbage collection.
@@ -56,6 +61,7 @@ package master;
 	     * Add an item to the collection at a specified index
 	     * @param index the index in which to add the item
 	     * @param item the item to add to the collection
+	     * @throws ListIndexOutOfBoundsException
 	     */
 	    public void add(int index, T item) throws ListIndexOutOfBoundsException
 	    {
@@ -85,6 +91,7 @@ package master;
 	     * Retrieve an item from the collection at a specified index
 	     * @param index the index in which to retrieve an item from the collection
 	     * @return returns the item at the specified index, if index is in range, null otherwise
+	     * @throws ListIndexOutOfBoundsException
 	     */
 	    public T get(int index) throws ListIndexOutOfBoundsException
 	    {
@@ -100,6 +107,8 @@ package master;
 
 	    /**
 	     * Remove the item at a specified index
+	     * @param index the index in which to remove an item from
+	     * @throws ListIndexOutOfBoundsException
 	     */
 	    public void remove(int index) throws ListIndexOutOfBoundsException
 	    {
@@ -124,6 +133,7 @@ package master;
 		 * Resize the underlying array to make room for additional items
 		 */
 		private void resize() {
+			@SuppressWarnings("unchecked")
 			T[] temp = (T[]) new Object[(int) (items.length * 1.5)];
 			
 			for (int i = 0; i < numItems; i++) {

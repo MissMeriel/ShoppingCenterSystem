@@ -8,6 +8,10 @@ package master;
 
 public class ExpressLine extends CheckoutLine {
 
+	/**
+	 * Constructor for an ExpressLine with a name
+	 * @param name the name to set for an express line
+	 */
 	public ExpressLine(String name){
 		super(name);
 	}
@@ -27,5 +31,4 @@ public class ExpressLine extends CheckoutLine {
 			throw new CheckoutLineException("Customer has more than 5 items in shopping cart");
 		}
 	}
-
 }
