@@ -1,10 +1,10 @@
-package master;
+package master1;
 
 /**
  * DSA Project CheckoutLine exception is a RuntimeException as compiler cannot
  * check for it ahead of time
  * 
- * @author Meriel
+ * @author Meriel Stein
  * @version 11.23.2016
  */
 

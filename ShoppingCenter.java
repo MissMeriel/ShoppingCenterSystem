@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 /**
  * DSA Project ShoppingCenter
@@ -48,13 +48,15 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * Standard Setter - for the collection of checkout lines in the shopping center
+	 * Standard Setter - for the collection of checkout lines in the shopping
+	 * center
+	 * 
 	 * @return returns the collection of checkout lines in the shopping
 	 */
-	public ListRAB<CheckoutLine> getCheckoutLines(){
+	public ListRAB<CheckoutLine> getCheckoutLines() {
 		return lines;
 	}
-	
+
 	/**
 	 * Standard Mutator - for the collection of checkout lines in the shopping
 	 * center
@@ -107,15 +109,17 @@ public class ShoppingCenter {
 
 	/**
 	 * Adds customer to the end of the AOSL of customers shopping
-	 * @throws ListIndexOutOfBoundsException if customer is already in the Shopping Center
-	 * @param customer the customer to add to the shopping center
+	 * 
+	 * @throws ListIndexOutOfBoundsException
+	 *             if customer is already in the Shopping Center
+	 * @param customer
+	 *            the customer to add to the shopping center
 	 */
 	public void addCustomer(Customer customer) {
-		if(linesContain(customer)){
+		if (linesContain(customer)) {
 			throw new ListIndexOutOfBoundsException("Customer "
-					+ customer.getName()
-					+ " is in a checkout line!");
-		} else if (customers.search(customer.getName()) >= 0){
+					+ customer.getName() + " is in a checkout line!");
+		} else if (customers.search(customer.getName()) >= 0) {
 			throw new ListIndexOutOfBoundsException("Customer "
 					+ customer.getName()
 					+ " is already in the Shopping Center!");
@@ -124,6 +128,16 @@ public class ShoppingCenter {
 		}
 	}
 
+	/**
+	 * Finds a customer shopping in the ShoppingCenter
+	 * 
+	 * @param cust_name
+	 *            String key associated with a Customer
+	 * @return Customer associated with param cust_name in ShoppingCenter's
+	 *         shopping customers
+	 * @throws ListIndexOutOfBoundsException
+	 *             if customer isn't shopping in shopping center
+	 */
 	public Customer getCustomer(String cust_name) {
 		try {
 			return customers.get(customers.search(cust_name));
@@ -132,18 +146,35 @@ public class ShoppingCenter {
 					+ " not found.");
 		}
 	}
-	
-	public void removeCustomer(Customer customer){
+
+	/**
+	 * Removes a Customer shopping in the ShoppingCenter
+	 * 
+	 * @param customer
+	 */
+	public void removeCustomer(Customer customer) {
 		customers.remove(customers.search(customer.getName()));
 	}
 
+	/**
+	 * Adjust stock up or down for a particular Item in inventory
+	 * 
+	 * @param item_name
+	 *            String key associated with item to be adjusted
+	 * @param i
+	 *            amount to adjust stock by
+	 * @return int representing newly adjusted stock of Item
+	 * @throws ListIndexOutOfBoundsException
+	 *             if there is no Item in the ShoppingCenter inventory
+	 *             associated with String item_name
+	 */
 	public int adjustStock(String item_name, int i) {
 		try {
 			Item item = inventory.get(inventory.search(item_name));
 			item.adjustCurrentStock(i);
 			return item.getCurrentStock();
 		} catch (ListIndexOutOfBoundsException e) {
-			throw new ItemException("No "+item_name+" in stock.");
+			throw new ItemException("No " + item_name + " in stock.");
 		}
 	}
 
@@ -159,9 +190,12 @@ public class ShoppingCenter {
 
 	/**
 	 * Accessor for an item in the inventory specified by name
-	 * @throws ListIndexOutOfBoundsException if item is not present in Shopping Center inventory. 
+	 * 
+	 * @throws ListIndexOutOfBoundsException
+	 *             if item is not present in Shopping Center inventory.
 	 * @return item if extant in inventory
-	 * @param item the item's name for retrieval from inventory
+	 * @param item
+	 *            the item's name for retrieval from inventory
 	 */
 	public Item getInventoryItem(String item) {
 		try {
@@ -174,6 +208,7 @@ public class ShoppingCenter {
 
 	/**
 	 * Standard Accessor - for the size of the inventory
+	 * 
 	 * @return number of unique items in inventory
 	 */
 	public int getInventorySize() {
@@ -181,22 +216,25 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * Determine whether or not the Shopping Center's checkout lines have 
-	 * a specific customer in waiting in them
-	 * @param customer the customer to check the checkout lines for
-	 * @return returns true if the customer was found in a checkout line, false otherwise
+	 * Determine whether or not the Shopping Center's checkout lines have a
+	 * specific customer in waiting in them
+	 * 
+	 * @param customer
+	 *            the customer to check the checkout lines for
+	 * @return returns true if the customer was found in a checkout line, false
+	 *         otherwise
 	 */
-	public boolean linesContain(Customer customer){
-		for (int i = 0; i< lines.size(); i++){
-			if (lines.get(i).contains(customer)){
+	public boolean linesContain(Customer customer) {
+		for (int i = 0; i < lines.size(); i++) {
+			if (lines.get(i).contains(customer)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/**
-	 * print contents of checkout lines
+	 * Print contents of checkout lines
 	 */
 	public void printCheckoutLines() {
 		for (int i = 0; i < lines.size(); i++) {
@@ -205,10 +243,10 @@ public class ShoppingCenter {
 	}
 
 	/**
-	 * print customers currently shopping.
+	 * Print customers currently shopping.
 	 */
 	public void printCustomers() {
-		if(customers.isEmpty()){
+		if (customers.isEmpty()) {
 			System.out.println("No customers are in the Shopping Center!");
 		} else {
 			System.out.println("The following " + customers.size()
@@ -220,19 +258,17 @@ public class ShoppingCenter {
 	/**
 	 * Print items at or below re-stocking threshold
 	 */
-	public void printRestockableItems(){
+	public void printRestockableItems() {
 		System.out.println("Items at restocking level:");
 		for (int i = 0; i < inventory.size(); i++) {
 			Item item = inventory.get(i);
-			if (item.getCurrentStock() <= item
-					.getRestockThreshold()) {
-				System.out.println("\t" + item.getName()
-						+ " with " + item.getCurrentStock()
-						+ " items.");
+			if (item.getCurrentStock() <= item.getRestockThreshold()) {
+				System.out.println("\t" + item.getName() + " with "
+						+ item.getCurrentStock() + " items.");
 			}
 		}
 	}
-	
+
 	/**
 	 * increment the time shopping of all customers by one minute.
 	 */
@@ -242,14 +278,16 @@ public class ShoppingCenter {
 			c.incrementShoppingTime();
 		}
 	}
-	
+
 	/**
 	 * Determine whether or not the checkout lines are empty
-	 * @return returns true is all of the checkout lines are empty, false otherwise
+	 * 
+	 * @return returns true is all of the checkout lines are empty, false
+	 *         otherwise
 	 */
-	public boolean linesEmpty(){
-		for (int i = 0; i< lines.size(); i++){
-			if(lines.get(i).getLength() > 0){
+	public boolean linesEmpty() {
+		for (int i = 0; i < lines.size(); i++) {
+			if (lines.get(i).getLength() > 0) {
 				return false;
 			}
 		}
@@ -258,13 +296,16 @@ public class ShoppingCenter {
 
 	/**
 	 * When the customer finishes shopping (s)he gets into one of the three
-	 * checkout lines. If the customer has less than or equal to 4 items, 
-	 * (s)he can use the express checkout line. Otherwise (s)he chooses the shortest regular line. 
-	 * If the express line is twice as long as a regular line a customer with less than or equal to 
-	 * 4 items will choose the shortest regular line for checkout instead.
+	 * checkout lines. If the customer has less than or equal to 4 items, (s)he
+	 * can use the express checkout line. Otherwise (s)he chooses the shortest
+	 * regular line. If the express line is twice as long as a regular line a
+	 * customer with less than or equal to 4 items will choose the shortest
+	 * regular line for checkout instead.
 	 * 
-	 * @param customer the customer to checkout
-	 * @return returns an updated checkout line after the customer has been served
+	 * @param customer
+	 *            the customer to checkout
+	 * @return returns an updated checkout line after the customer has been
+	 *         served
 	 */
 	public CheckoutLine checkoutCustomer(Customer customer) {
 		CheckoutLine lowLine = new CheckoutLine();

@@ -1,8 +1,8 @@
-package master;
+package master1;
 
 /**
  * Array-based implementation of the Queue ADT.
- * @author Jon Spratt
+ * @author Jon Spratt, Meriel Stein
  *
  * @param <T> the type of item stored in this ADT
  */

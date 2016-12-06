@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 //********************************************************
 //Interface ListInterface for the ADT list.

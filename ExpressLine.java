@@ -1,8 +1,8 @@
-package master;
+package master1;
 
 /**
  * DSA Project Express checkout line for customers with 5 items or fewer
- * @author Meriel
+ * @author Meriel Stein
  * @version 11.23.2016
  */
 
@@ -17,7 +17,7 @@ public class ExpressLine extends CheckoutLine {
 	}
 	
 	/**
-	 * Adds customer to the end of the checkout queue if customer has 5 items or
+	 * Adds customer to the end of the checkout queue if customer has 4 items or
 	 * less in their shopping cart.
 	 * 
 	 * @param c customer lining up at the back of the checkout queue.
@@ -25,10 +25,10 @@ public class ExpressLine extends CheckoutLine {
 	 */
 	@Override
 	public void addCustomer(Customer c) throws CheckoutLineException {
-		if (c.getCart() <= 5) {
+		if (c.getCart() <= 4) {
 			line.enqueue(c);
 		} else {
-			throw new CheckoutLineException("Customer has more than 5 items in shopping cart");
+			throw new CheckoutLineException("Customer has more than 4 items in shopping cart");
 		}
 	}
 }

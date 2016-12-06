@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 /**
  * This class is used to represent an item in a shopping center

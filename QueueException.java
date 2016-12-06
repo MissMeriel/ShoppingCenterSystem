@@ -1,4 +1,4 @@
-package master;
+package master1;
 @SuppressWarnings("serial")
 public class QueueException extends RuntimeException {
 	  /**

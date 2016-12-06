@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * DSA Project Driver
  * 
- * @author Meriel, Jon Spratt
+ * @author Meriel Stein, Jon Spratt
  * @version 12.1.2016
  */
 
@@ -206,6 +206,7 @@ public class Driver {
 								break;
 							} else {
 								high_time_cust.resetShoppingTime();
+								high_time_cust.leaveCheckout();
 								center.addCustomer(high_time_cust);
 								System.out
 										.println("Customer "
@@ -217,6 +218,7 @@ public class Driver {
 
 						// Determine which line to queue high_time_customer in
 						// and queue them
+						high_time_cust.enterCheckout();
 						CheckoutLine tempLine = center
 								.checkoutCustomer(high_time_cust);
 						System.out.println("After "
@@ -247,7 +249,7 @@ public class Driver {
 							}
 							Customer customer = l.serveCustomer();
 							System.out
-									.println("Should customer "
+									.print("Should customer "
 											+ customer.getName()
 											+ " check out or keep on shopping? Checkout?(Y/N): ");
 							input = br.readLine().trim().toLowerCase();
@@ -263,6 +265,7 @@ public class Driver {
 									// reset.
 
 								customer.resetShoppingTime();
+								customer.leaveCheckout();
 								center.addCustomer(customer);
 								System.out.println("Customer "
 										+ customer.getName() + " with "
@@ -283,8 +286,6 @@ public class Driver {
 						break;
 
 					case 9: // Reorder an item.
-						// Restock a specified item by item name and
-						// restocking amount.
 						try {
 							System.out
 									.print(">>Enter item name to be re-ordered: ");

@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 public interface QueueInterface<T> {
 

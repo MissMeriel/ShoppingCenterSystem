@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 /**
  * Array-based implementation of the ADT list.

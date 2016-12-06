@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 /**
  * Exception for catching a bad indexes given to ADT methods

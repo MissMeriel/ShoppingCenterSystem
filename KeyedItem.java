@@ -1,4 +1,3 @@
-package master;
 
 /**
  * This class represents a Keyed Item.

@@ -1,4 +1,4 @@
-package master;
+package master1;
 
 /**
  * DSA Project - Prevents item stock from going below zero.

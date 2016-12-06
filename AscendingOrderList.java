@@ -1,9 +1,9 @@
-package master;
+package master1;
 
 /**
  * This class represents the AscendingOrderList ADT
  * 
- * @author Jon Spratt
+ * @author Jon Spratt, Meriel Stein
  *
  * @param <T>
  *            The type of the items in this collection
@@ -40,9 +40,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 		if (numItems == items.length) {
 			resize();
 		} // end if
-
 		int index = search(item.getKey());
-
 		if (index < 0 && index <= numItems) {
 			index = (index * -1) - 1;
 			// make room for new element by shifting all items at
@@ -103,7 +101,6 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 			}
 			mid = (low + high) / 2;
 		}
-
 		if (mid < numItems && items[mid] != null && searchKey.equals(items[mid].getKey())) {
 			index = mid;
 		} else {
