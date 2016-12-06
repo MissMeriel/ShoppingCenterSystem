@@ -35,8 +35,8 @@ public class Item extends KeyedItem<String>{
 	/**
 	 * Constructor for item by name and re-stocking threshold. 
 	 * Current stock equals zero upon construction
-	 * @param name
-	 * @param restockThreshold
+	 * @param name the name of an item
+	 * @param restockThreshold the re-stocking threshold for an item
 	 */
 	public Item(String name, int restockThreshold) {
 		super(name);

@@ -32,7 +32,9 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	/**
 	 * Add an item to the collection by key in ascending order
 	 * @param item the item to add to the collection
-	 * @throws ListIndexOutOfBoundsException
+	 * @throws ListIndexOutOfBoundsException on indexes between zero and 
+	 * the current number of items in the collection or indexes greater than
+	 * the current number of items in the collection
 	 */
 	public void add(T item) throws ListIndexOutOfBoundsException {
 		if (numItems == items.length) {
@@ -65,7 +67,9 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	/**
 	 * Retrieve an item from the collection by index from 0 to size()-1.
 	 * @param index the index to retrieve an item from
-	 * @throws ListIndexOutOfBoundsException
+	 * @throws ListIndexOutOfBoundsException on indexes less than zero or 
+	     * greater than the current number of items in the collection
+	 * @return returns the item found at the given index
 	 */
 	public T get(int index) throws ListIndexOutOfBoundsException {
 		if (index >= 0 && index <= numItems) {
@@ -110,6 +114,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 
 	/**
 	 * Standard Accessor - for whether or not the collection is empty
+	 * @return returns true if the collection is empty, false otherwise
 	 */
 	public boolean isEmpty() {
 		return numItems == 0;
@@ -117,6 +122,7 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 
 	/**
 	 * Standard Accessor - for the size of the collection
+	 * @return returns the number of items in the collection
 	 */
 	public int size() {
 		return numItems;
@@ -125,7 +131,8 @@ public class AscendingOrderList<T extends KeyedItem<KT>, KT extends Comparable<?
 	/**
 	 * Remove an item from the collection by index
 	 * @param index the index in which to remove an item from
-	 * @throws ListIndexOutOfBoundsException
+	 * @throws ListIndexOutOfBoundsException on indexes less than zero or 
+	     * greater than or equal to the current number of items in the collection
 	 */
 	public void remove(int index) throws ListIndexOutOfBoundsException {
 		if (index >= 0 && index < numItems) {

@@ -5,7 +5,7 @@ package master;
  * Keyed items are comparable by their key which is set upon constructing.
  * @author Jon
  *
- * @param <KT>
+ * @param <KT> The key type for a keyed item
  */
 public abstract class KeyedItem<KT extends Comparable<? super KT>> {
 	/**

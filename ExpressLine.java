@@ -21,7 +21,7 @@ public class ExpressLine extends CheckoutLine {
 	 * less in their shopping cart.
 	 * 
 	 * @param c customer lining up at the back of the checkout queue.
-	 * @throws ExpressLineException 
+	 * @throws CheckoutLineException when a customer has more than the maximum items allowed in express line
 	 */
 	@Override
 	public void addCustomer(Customer c) throws CheckoutLineException {

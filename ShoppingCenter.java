@@ -49,7 +49,7 @@ public class ShoppingCenter {
 
 	/**
 	 * Standard Setter - for the collection of checkout lines in the shopping center
-	 * @return ListRAB<CheckoutLine> collection of checkout lines in the shopping
+	 * @return returns the collection of checkout lines in the shopping
 	 */
 	public ListRAB<CheckoutLine> getCheckoutLines(){
 		return lines;
@@ -107,7 +107,7 @@ public class ShoppingCenter {
 
 	/**
 	 * Adds customer to the end of the AOSL of customers shopping
-	 * @throw ListIndexOutOfBoundsException if customer is already in the Shopping Center
+	 * @throws ListIndexOutOfBoundsException if customer is already in the Shopping Center
 	 * @param customer the customer to add to the shopping center
 	 */
 	public void addCustomer(Customer customer) {
@@ -161,6 +161,7 @@ public class ShoppingCenter {
 	 * Accessor for an item in the inventory specified by name
 	 * @throws ListIndexOutOfBoundsException if item is not present in Shopping Center inventory. 
 	 * @return item if extant in inventory
+	 * @param item the item's name for retrieval from inventory
 	 */
 	public Item getInventoryItem(String item) {
 		try {
@@ -257,10 +258,10 @@ public class ShoppingCenter {
 
 	/**
 	 * When the customer finishes shopping (s)he gets into one of the three
-	 * checkout lines. If the customer has <=4 items, (s)he can use the express
-	 * checkout line. Otherwise (s)he chooses the shortest regular line. If the
-	 * express line is twice as long as a regular line a customer with <=4 items
-	 * will choose the shortest regular line for checkout instead.
+	 * checkout lines. If the customer has less than or equal to 4 items, 
+	 * (s)he can use the express checkout line. Otherwise (s)he chooses the shortest regular line. 
+	 * If the express line is twice as long as a regular line a customer with less than or equal to 
+	 * 4 items will choose the shortest regular line for checkout instead.
 	 * 
 	 * @param customer the customer to checkout
 	 * @return returns an updated checkout line after the customer has been served

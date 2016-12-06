@@ -61,7 +61,8 @@ package master;
 	     * Add an item to the collection at a specified index
 	     * @param index the index in which to add the item
 	     * @param item the item to add to the collection
-	     * @throws ListIndexOutOfBoundsException
+	     * @throws ListIndexOutOfBoundsException on indexes less than zero or 
+	     * greater than or equal to the current number of items in the collection
 	     */
 	    public void add(int index, T item) throws ListIndexOutOfBoundsException
 	    {
@@ -91,7 +92,8 @@ package master;
 	     * Retrieve an item from the collection at a specified index
 	     * @param index the index in which to retrieve an item from the collection
 	     * @return returns the item at the specified index, if index is in range, null otherwise
-	     * @throws ListIndexOutOfBoundsException
+	     * @throws ListIndexOutOfBoundsException on indexes less than zero or 
+	     * greater than or equal to the current number of items in the collection
 	     */
 	    public T get(int index) throws ListIndexOutOfBoundsException
 	    {
@@ -108,7 +110,8 @@ package master;
 	    /**
 	     * Remove the item at a specified index
 	     * @param index the index in which to remove an item from
-	     * @throws ListIndexOutOfBoundsException
+	     * @throws ListIndexOutOfBoundsException on indexes less than zero or 
+	     * greater than or equal to the current number of items in the collection
 	     */
 	    public void remove(int index) throws ListIndexOutOfBoundsException
 	    {
