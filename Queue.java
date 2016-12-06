@@ -1,6 +1,6 @@
 package master;
 
-public class Queue<T> implements QueueInterface <T> {
+public class Queue< T extends KeyedItem> implements QueueInterface <T> {
 
 	protected T[] items;
 	protected int front;
@@ -9,7 +9,7 @@ public class Queue<T> implements QueueInterface <T> {
 	
 	@SuppressWarnings("unchecked")
 	public Queue() {
-		items = (T[]) new Object[3];
+		items = (T[]) new KeyedItem[3];
 		front = 0;
 		back = items.length - 1;
 		numItems = 0;
@@ -22,7 +22,7 @@ public class Queue<T> implements QueueInterface <T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void enqueue(Object newItem) throws QueueException {
+	public void enqueue(T newItem) throws QueueException {
 		if (numItems == items.length) {
 			resize();
 		}		
@@ -74,6 +74,15 @@ public class Queue<T> implements QueueInterface <T> {
 	
 	public int getLength(){
 		return numItems;
+	}
+	
+	public boolean contains(T item){
+		for(int i = 0; i< numItems; i++){
+			if(item.getKey().equals(items[i].getKey())){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public String toString() {

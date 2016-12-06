@@ -8,7 +8,7 @@ package master;
 
 public class ItemException extends RuntimeException{
 
-	public ItemException(){
-		super("Item stock too low to complete action.");
+	public ItemException(String s){
+		super(s);
 	}
 }

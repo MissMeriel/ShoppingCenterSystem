@@ -1,7 +1,7 @@
 package master;
 
 /**
- * DSA Project Normal checkout line
+ * DSA Project Regular checkout line
  * 
  * @author Meriel
  * @version 11.23.2016
@@ -48,18 +48,26 @@ public class CheckoutLine {
 	public int getLength() {
 		return line.getLength();
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
-	
-	public void setName(String name){
+
+	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public boolean contains(Customer customer){
+		return line.contains(customer);
+	}
 
-	// toString() needs to follow format:
-	// Customer Eevee has 7 items in the shopping basket.
-	// Customer Woobat has 6 items in the shopping basket.
+	/**
+	 * If line is empty, returns String saying so. Otherwise, prints information
+	 * of customers in the CheckoutLine in the format: Customer Eevee has 7
+	 * items in the shopping basket.
+	 * 
+	 * @return String describing contents of the checkout line.
+	 */
 	public String toString() {
 		if (line.isEmpty()) {
 			return "There are no customers in " + name + "!";

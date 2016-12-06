@@ -85,7 +85,7 @@ public class Item extends KeyedItem<String>{
 	 */
 	public void adjustCurrentStock(int amount) {
 		if (currentStock + amount < 0) {
-			throw new ItemException();
+			throw new ItemException("No "+name+"s in stock.");
 		} else {
 			currentStock += amount;	
 		}

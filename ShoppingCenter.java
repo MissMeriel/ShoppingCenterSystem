@@ -62,8 +62,7 @@ public class ShoppingCenter {
 	 * @param lines
 	 *            the collection of checkout lines to set
 	 */
-	public void setCheckoutLines(ListRAB<CheckoutLine> lines) { // DO WE NEED
-																// THIS METHOD?
+	public void setCheckoutLines(ListRAB<CheckoutLine> lines) {
 		this.lines = lines;
 	}
 
@@ -102,27 +101,35 @@ public class ShoppingCenter {
 	 * @param customers
 	 *            the collection of customers to set
 	 */
-	public void setCustomers(AscendingOrderList<Customer, String> customers) { // DO
-																				// WE
-																				// NEED
-																				// THIS
-																				// METHOD?
+	public void setCustomers(AscendingOrderList<Customer, String> customers) {
 		this.customers = customers;
 	}
 
 	/**
 	 * Adds customer to the end of the AOSL of customers shopping
-	 * 
+	 * @throw ListIndexOutOfBoundsException if customer is already in the Shopping Center
 	 * @param customer
 	 */
 	public void addCustomer(Customer customer) {
-		if (customers.isEmpty() || customers.search(customer.getName()) < 0) {
-			customers.add(customer);										   // If you trace this it seems to throw an indexoutofbounds every iteration 
-		} else {															   // that gets caught in the driver. 
+		if(linesContain(customer)){
+			throw new ListIndexOutOfBoundsException("Customer "
+					+ customer.getName()
+					+ " is in a checkout line!");
+		} else if (customers.search(customer.getName()) >= 0){
 			throw new ListIndexOutOfBoundsException("Customer "
 					+ customer.getName()
 					+ " is already in the Shopping Center!");
+		} else {
+			customers.add(customer);
 		}
+		
+//		if (customers.isEmpty() || customers.search(customer.getName()) < 0 && !linesContain(customer)) {
+//			customers.add(customer);
+//		} else {
+//			throw new ListIndexOutOfBoundsException("Customer "
+//					+ customer.getName()
+//					+ " is already in the Shopping Center!");
+//		}
 	}
 
 	public Customer getCustomer(String cust_name) {
@@ -133,6 +140,10 @@ public class ShoppingCenter {
 					+ " not found.");
 		}
 	}
+	
+	public void removeCustomer(Customer customer){
+		customers.remove(customers.search(customer.getName()));
+	}
 
 	public int adjustStock(String item_name, int i) {
 		try {
@@ -140,7 +151,7 @@ public class ShoppingCenter {
 			item.adjustCurrentStock(i);
 			return item.getCurrentStock();
 		} catch (ListIndexOutOfBoundsException e) {
-			throw new ListIndexOutOfBoundsException("");
+			throw new ItemException("No "+item_name+" in stock.");
 		}
 	}
 
@@ -178,6 +189,18 @@ public class ShoppingCenter {
 	}
 
 	/**
+	 * 
+	 */
+	public boolean linesContain(Customer customer){
+		for (int i = 0; i< lines.size(); i++){
+			if (lines.get(i).contains(customer)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * print contents of checkout lines
 	 */
 	public void printCheckoutLines() {
@@ -190,11 +213,28 @@ public class ShoppingCenter {
 	 * print customers currently shopping.
 	 */
 	public void printCustomers() {
-		System.out.println("The following " + customers.size()
-				+ " customers are in the Shopping Center:");
-		System.out.print(customers.toString());
+		if(customers.isEmpty()){
+			System.out.println("No customers are in the Shopping Center!");
+		} else {
+			System.out.println("The following " + customers.size()
+					+ " customers are in the Shopping Center:");
+			System.out.print(customers.toString());
+		}
 	}
 
+	public void printRestockableItems(){
+		System.out.println("Items at restocking level:");
+		for (int i = 0; i < inventory.size(); i++) {
+			Item item = inventory.get(i);
+			if (item.getCurrentStock() <= item
+					.getRestockThreshold()) {
+				System.out.println("\t" + item.getName()
+						+ " with " + item.getCurrentStock()
+						+ " items.");
+			}
+		}
+	}
+	
 	/**
 	 * increment the time shopping of all customers by one minute.
 	 */
@@ -216,9 +256,9 @@ public class ShoppingCenter {
 
 	/**
 	 * When the customer finishes shopping (s)he gets into one of the three
-	 * checkout lines. If the customer has <=5 items, (s)he can use the express
+	 * checkout lines. If the customer has <=4 items, (s)he can use the express
 	 * checkout line. Otherwise (s)he chooses the shortest regular line. If the
-	 * express line is twice as long as a regular line a customer with <=5 items
+	 * express line is twice as long as a regular line a customer with <=4 items
 	 * will choose the shortest regular line for checkout instead.
 	 * 
 	 * @param customer
@@ -227,12 +267,10 @@ public class ShoppingCenter {
 		CheckoutLine lowLine = new CheckoutLine();
 		CheckoutLine highLine = new CheckoutLine();
 		ExpressLine expressLine = new ExpressLine(null);
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < lines.size(); i++) {
 			if (lines.get(i) instanceof ExpressLine) {
 				expressLine = (ExpressLine) lines.get(i);
 			} else {
-				//System.out.println("lines.get(i).getLength(): "+lines.get(i).getLength());
-				//System.out.println("highLine.getLength(): "+highLine.getLength());
 				if (lines.get(i).getLength() > highLine.getLength()) {
 					highLine = lines.get(i);
 				} else {
@@ -240,20 +278,12 @@ public class ShoppingCenter {
 				}
 			}
 		}
-		if (customer.getCart() < 6
-				&& expressLine.getLength() <= 2 * lowLine.getLength()) {
+		if (customer.getCart() < 5
+				&& expressLine.getLength() < 2 * lowLine.getLength()) {
 			expressLine.addCustomer(customer);
-			/*
-			System.out.println("current state of center.lines: ");
-			System.out.println(lines.toString());
-			*/
 			return expressLine;
 		} else {
 			lowLine.addCustomer(customer);
-			/*
-			System.out.println("current state of center.lines: ");
-			System.out.println(lines.toString());
-			*/
 			return lowLine;
 		}
 	}
